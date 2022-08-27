@@ -1,0 +1,6 @@
+---
+# handlers file for installation
+- name: Start mongodb
+  service: name=mongod state=started
+- name: Restart mongodb
+  service: name=mongod state=restarted
