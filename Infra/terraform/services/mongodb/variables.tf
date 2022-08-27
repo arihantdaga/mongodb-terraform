@@ -45,9 +45,18 @@ variable "mongodb_port" {
   default     = 27120
 }
 
-
 variable "ssh_key_path" {
     description = "path to the ssh key"
     type        = string
     default     = ""
 }
+
+# variable "mongodb_amdin_user" {
+#     description = "Mongodb Super admin username"
+#     type = string
+# }
+
+# variable "mongodb_amdin_pass" {
+#     description = "Mongodb Super admin password"
+#     type = string
+# }

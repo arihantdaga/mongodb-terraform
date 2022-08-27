@@ -7,15 +7,17 @@ output "private_ips" {
 }
 
 resource "local_file" "ansible_inventory" {
-content = templatefile("${path.module}/ansible_inventory.tmpl",
-  {
-  ip_mongo_nodes = digitalocean_droplet.mongodbdroplets.*.ipv4_address_private
-  hostname_mongo_nodes = digitalocean_droplet.mongodbdroplets.*.ipv4_address
-  mongodb_port = var.mongodb_port
-  replica_set_name = var.replica_set_name
+  content = templatefile("${path.module}/ansible_inventory.tmpl",
+    {
+      ip_mongo_nodes = digitalocean_droplet.mongodbdroplets.*.ipv4_address_private
+      hostname_mongo_nodes = digitalocean_droplet.mongodbdroplets.*.ipv4_address
+      mongodb_port = var.mongodb_port
+      replica_set_name = var.replica_set_name
+      # mongodb_admin_user = var.mongodb_amdin_user
+      # mongod_admin_pass = var.mongodb_amdin_pass
+    })
 
-  })
-filename = "${path.module}/../../../ansible/mongodb/inventory"
+  filename = "${path.module}/../../../ansible/mongodb/inventory"
 }
 
 resource "local_sensitive_file" "ssh_private_key" {

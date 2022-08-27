@@ -1,10 +1,10 @@
 [mongodb_lead]
-${hostname_mongo_nodes[0]} ansible_host=${ip_mongo_nodes[0]} host_private_ip=${ip_mongo_nodes[0]}
+${hostname_mongo_nodes[0]} host_private_ip=${ip_mongo_nodes[0]}
 
 [mongodb_secondary]
 %{ for index,ip in ip_mongo_nodes ~}
 %{if index!=0 ~}
-${hostname_mongo_nodes[index]} ansible_host=${ip} host_private_ip=${ip}
+${hostname_mongo_nodes[index]} host_private_ip=${ip}
 %{ endif ~}
 %{ endfor ~}
 
@@ -17,3 +17,4 @@ ansible_python_interpreter=/usr/bin/python3
 [mongodb:vars]
 mongodb_port=${mongodb_port}
 replica_set_name=${replica_set_name}
+mongodb_replica_set_complete_host_name=%{ for index,ip in ip_mongo_nodes ~}${ip}:${mongodb_port},%{ endfor ~}

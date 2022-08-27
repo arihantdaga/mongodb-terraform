@@ -9,3 +9,11 @@
   become_user: root
   roles:
     - initreplica
+  vars_prompt:
+  - name: "mongodb_admin_user"
+    prompt: "Enter Mongodb Super Admin Username"
+    # private: yes
+  - name: "mongodb_admin_pass"
+    prompt: "Enter MongoDb Super Admin Password"
+    private: yes
+  

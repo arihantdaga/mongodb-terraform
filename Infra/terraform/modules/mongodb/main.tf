@@ -51,6 +51,12 @@ resource "digitalocean_firewall" "mongodbfirewall" {
       source_tags = [ "mongodb" ]
     }
 
+    inbound_rule  {
+      protocol = "tcp"
+      port_range    = var.mongodb_port
+      source_tags = [ "mongodb" ]
+    }
+
     outbound_rule {
       protocol              = "icmp"
       destination_addresses = ["0.0.0.0/0", "::/0"]
