@@ -12,3 +12,4 @@ https://medium.com/@belougatech/create-a-mongodb-cluster-in-2-command-lines-with
 # Bugs
 - [ ] Right now we are asking mongodb username and password in third role at the time of setupuser, that means a user has to sit and wait for it. Lets do this automatic or take it in first role itself. 
 - [ ] Security - Upgrade from keyfile security to x509 Certificate. 
+- [ ] If user wants to use existing ssh key, allow using that instead of new ssh key. 
