@@ -1,6 +1,7 @@
 # Mongoterra
 Spin up a mongodb cluster quickly.
 This projects uses Terraform and Ansible to spin up a mongodb cluster. Terraform is used to create Digitalocean resources (droplets,firewall etc) Ansible is used to provision these nodes in the cluster.
+By default, the project will spin up a 3 node cluster with MongoDb 5.0
 
 ## Requirements
 * Terraform
@@ -41,9 +42,11 @@ cd Infra/ansible/mongodb
 ansible-playbook main.yaml
 ```
 
-## TODO
+## Todo
 - [ ] Allow using existing ssh key from digitalocean
 - [ ] Allow feature configuration - example - slowOpThreshold and monitoring.
 - [ ] Setup free cloud monitoring
 - [ ] Optionally Allow incoming traffic from entire VPC.
 - [ ] Option to provide VPC id.
+- [ ] Connect Terraform to Ansible
+- [ ] Support for AWS
