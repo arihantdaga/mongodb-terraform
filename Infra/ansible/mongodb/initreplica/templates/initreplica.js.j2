@@ -3,7 +3,7 @@ rs.initiate({
   version: 1,
   members: [
     {% for host in groups['mongodb'] %}
-    { _id: {{ loop.index }}, host : "{{ host }}:27017" },
+    { _id: {{ loop.index }}, host : "{{ hostvars[host]['host_dns_name'] }}:{{ mongodb_port }}" },
     {% endfor %}
     ]
   }

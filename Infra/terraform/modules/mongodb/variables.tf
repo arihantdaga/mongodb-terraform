@@ -27,3 +27,7 @@ variable "ssh_key_path" {
 variable "replica_set_name" {
   type = string
 }
+variable "mongodb_dns_hostnames" {
+  description = "mongodb dns names for each replica set"
+  type =  list(string)
+}

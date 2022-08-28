@@ -21,6 +21,12 @@ variable "mongodb_namespace" {
   default     = ""
 }
 
+variable "mongodb_dns_hostnames" {
+  description = "mongodb dns names for each replica set"
+  type =  list(string)
+  default = ["mongo1.example.local", "mongo2.example.local", "mongo3.example.local"]
+}
+
 variable "mongodb_instance_count" {
   description = "the count of the mongodb instance"
   type        = number

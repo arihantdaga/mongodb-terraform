@@ -27,6 +27,9 @@ resource "digitalocean_ssh_key" "mongodb_ssh_key_user" {
   public_key = file(var.ssh_key_path)
 }
   
+resource "digitalocean_tag" "mongodb" {
+  name = "mongodb"
+}
 
 // Droplets
 resource "digitalocean_droplet" "mongodbdroplets" {
@@ -43,12 +46,12 @@ resource "digitalocean_droplet" "mongodbdroplets" {
 
 // Firewall rules
 resource "digitalocean_firewall" "mongodbfirewall" {
-    name = "mqtt-firewall"
-    tags = [ "mqttnew" ]
+    name = "mongodb-firewall"
+    tags = [ "mongodb" ]
     inbound_rule  {
       protocol = "tcp"
       port_range    = "22"
-      source_tags = [ "mongodb" ]
+      source_addresses = ["0.0.0.0/0", "::/0"]
     }
 
     inbound_rule  {

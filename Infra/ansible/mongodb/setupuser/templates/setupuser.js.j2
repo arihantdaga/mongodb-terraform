@@ -1,11 +1,7 @@
-use admin
-
-var result =  db.createUser({
+db.createUser({
     user: '{{ mongodb_admin_user }}',
     pwd: '{{ mongodb_admin_pass }}',
     roles: [ 
         { role: "userAdminAnyDatabase", db: "admin" } 
     ]
 });
-
-printjson(result)

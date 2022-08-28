@@ -12,5 +12,6 @@ module "mongodb_replicaset" {
   mongodb_port                = var.mongodb_port
   ssh_key_path                = var.ssh_key_path
   replica_set_name            = var.replica_set_name
+  mongodb_dns_hostnames       = var.mongodb_dns_hostnames
 }
 

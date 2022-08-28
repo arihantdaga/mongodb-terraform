@@ -13,12 +13,23 @@ resource "local_file" "ansible_inventory" {
       hostname_mongo_nodes = digitalocean_droplet.mongodbdroplets.*.ipv4_address
       mongodb_port = var.mongodb_port
       replica_set_name = var.replica_set_name
+      mongodb_dns_hostnames = var.mongodb_dns_hostnames
       # mongodb_admin_user = var.mongodb_amdin_user
       # mongod_admin_pass = var.mongodb_amdin_pass
     })
 
   filename = "${path.module}/../../../ansible/mongodb/inventory"
 }
+resource "local_file" "hosts_list" {
+  content = templatefile("${path.module}/etc_hosts.tmpl",
+  {
+    ip_mongo_nodes = digitalocean_droplet.mongodbdroplets.*.ipv4_address_private
+    mongodb_dns_hostnames = var.mongodb_dns_hostnames
+  }
+  )
+  filename = "${path.module}/../../../ansible/mongodb/etc_hosts"
+}
+
 
 resource "local_sensitive_file" "ssh_private_key" {
     content =  tls_private_key.key.private_key_pem

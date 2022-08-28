@@ -1,5 +1,9 @@
 ---
 # tasks file for installation
+- name: MongoDB - Copy hosts data
+  blockinfile:
+    dest: /etc/hosts
+    block:  "{{ lookup('file', 'etc_hosts') }}" 
 
 - name: MongoDB - Import public key
   apt_key:
@@ -19,21 +23,27 @@
     state: latest
     update_cache: yes
 
+- name: MongoDB - Generate random string for mongodb keyfile
+  local_action: ansible.builtin.command openssl rand -base64 756
+  become: false
+  register: mongodb_keyfile
+  run_once: True
+  
+- name: MongoDB - Copy keyfile for internal authentication
+  template:
+      force: yes
+      src: mongodbkeyfile.j2
+      dest: /etc/mongod.keyfile
+      owner: mongodb
+      group: mongodb
+      mode: '0400'
+
 - name: MongoDB - Copy configuration file
   template:
     force: yes
     src: mongod.conf.j2
     dest: /etc/mongod.conf
-  notify: Start mongodb
-
-#- name: MongoDB - Create and change file ownership, group and permissions
-#  file:
-#    path: /data/db
-#    owner: root
-#    group: root
-#    mode: '0755'
-#    state: directory
-
+  notify: Restart mongodb
 
 - name: MongoDB - Ensure mongodb is running and enabled to start automatically after reboots
   systemd:

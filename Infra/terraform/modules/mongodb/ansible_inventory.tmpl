@@ -1,10 +1,10 @@
 [mongodb_lead]
-${hostname_mongo_nodes[0]} host_private_ip=${ip_mongo_nodes[0]}
+${hostname_mongo_nodes[0]} host_private_ip=${ip_mongo_nodes[0]} host_dns_name=${mongodb_dns_hostnames[0]}
 
 [mongodb_secondary]
 %{ for index,ip in ip_mongo_nodes ~}
 %{if index!=0 ~}
-${hostname_mongo_nodes[index]} host_private_ip=${ip}
+${hostname_mongo_nodes[index]} host_private_ip=${ip} host_dns_name=${mongodb_dns_hostnames[index]}
 %{ endif ~}
 %{ endfor ~}
 
