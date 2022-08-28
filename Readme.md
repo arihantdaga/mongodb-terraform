@@ -32,6 +32,8 @@ Other variables can be passed to terraform as well.
 
 
 **Provision Replica Set**
+
+
 This would configure replica sets and also create super admin user with `role: userAdminAnyDatabase`. It'll ask username and password in the prompt. On successful execution, it'll automatically remove this username and password from the disk. you cannot retrieve password from the disk again. So save it somewhere safe.
 
 ```bash
